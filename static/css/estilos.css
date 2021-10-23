@@ -1,0 +1,33 @@
+body{
+    background-color: #73aeb6;
+    font-size: 20px;
+    font-weight: 300;
+    
+}
+.division{
+    border: 1px #ebebeb solid;
+    color: #b3b3b3 ;
+}
+.card-login{
+    margin-top: 100px;
+    margin-left: 35%;
+    margin-right: 35%;
+}
+.titulo-login{
+    text-align: center;
+}
+.btn-primary{
+    background-color:#daa59d;
+    border-color: #a1726b;
+}
+.navegacion{
+    background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(250,250,250,1) 52%, rgba(254,254,254,1) 100%);
+}
+.contenido{
+    background-color: #fff;
+}
+.inicio{
+    color:#0f181a;
+}
+
