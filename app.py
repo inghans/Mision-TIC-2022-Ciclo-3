@@ -40,15 +40,17 @@ def sesion():
         # inicio base de datos
         response=controller.Ingreso(usuario,clave)
         if response:
+            #traemos el ID y ROL del LOGIN
             resultado=response[0]
             option=['DOCENTE','DOCENTEE','ADMIN']
             if resultado=='ESTUDIANTE':
-                #return response
-                return render_template('home.html',resultado= resultado)
+                # enviamos a ruta estudiantes
+                datos_estudiante=controller.DatosEstudiante(resultado[1])
+                return render_template('home_estudiantes.html',resultado= resultado)
             elif resultado=='DOCENTE':
-                return render_template('prueba.html',resultado= resultado,option=option)
+                return render_template('home_docente.html',resultado= resultado)
             else:
-                return render_template('prueba.html',resultado= resultado)
+                return render_template('home.html',resultado= resultado)
         else:
             resultado='visible'
             return render_template('login.html',resultado= resultado)        
