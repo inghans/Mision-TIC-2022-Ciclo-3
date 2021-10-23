@@ -5,7 +5,7 @@ import mysql.connector
 def Conectar():
     # Establecido una ruta fisica para la BDD
     #conexion= sqlite3.connect("D:\\DATABASES\\bdd.db")
-    conexion= sqlite3.connect("c:\\db_icesi\\ciclo3db.db")
+    conexion= sqlite3.connect("C:\\GIT\\Mision-TIC-2022-Ciclo-3\\ciclo3db.db")
     #conexion=mysql.connector()
     return conexion
 
