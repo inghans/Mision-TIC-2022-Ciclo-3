@@ -1,11 +1,11 @@
 import sqlite3
 from sqlite3 import Error
-import mysql.connector
+#import mysql.connector
 
 def Conectar():
     # Establecido una ruta fisica para la BDD
     #conexion= sqlite3.connect("D:\\DATABASES\\bdd.db")
-    conexion= sqlite3.connect("C:\\GIT\\Mision-TIC-2022-Ciclo-3\\ciclo3db.db")
+    conexion= sqlite3.connect("Mision-TIC-2022-Ciclo-3\\ciclo3db.db")
     #conexion=mysql.connector()
     return conexion
 
