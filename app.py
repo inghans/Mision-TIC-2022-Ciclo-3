@@ -14,19 +14,30 @@ def register():
 
 @app.route('/estudiantes')
 def estudiantes():
-    return render_template('estudiantes.html')
+    response=controller.DatosUsuarios('ESTUDIANTE')
+    return render_template('estudiantes.html',lista=response)
 
 @app.route('/docentes')
 def docentes():
-    return render_template('docentes.html')
+    response=controller.DatosUsuarios('DOCENTE')
+    return render_template('docentes.html',lista=response)
 
-@app.route('/materias')
+@app.route('/materias',methods=('GET','POST'))
 def materias():
-    return render_template('materias.html')
+    if request.method == 'POST':
+        materia=request.form['txtMateria']
+        r=controller.MateriaGuardar(materia)
+        response=controller.MateriasListar()        
+        return render_template('materias.html',lista=response)
+    else:
+        response=controller.MateriasListar()        
+        return render_template('materias.html',lista=response)
 
 @app.route('/notas')
 def notas():
-    return render_template('notas.html')
+    ejemplo='bienvenido Hans aqui puedes verificar tus notas'
+    usuario='Hans'
+    return render_template('notas.html',ejemplo=ejemplo,usuario=usuario)
 
 @app.route('/home')
 def home():
@@ -42,15 +53,14 @@ def sesion():
         if response:
             #traemos el ID y ROL del LOGIN
             resultado=response[0]
-            option=['DOCENTE','DOCENTEE','ADMIN']
+            usuario=response[2]            
             if resultado=='ESTUDIANTE':
-                # enviamos a ruta estudiantes
-                datos_estudiante=controller.DatosEstudiante(resultado[1])
-                return render_template('home_estudiantes.html',resultado= resultado)
+                # enviamos a ruta estudiantes                
+                return render_template('home_estudiantes.html',usuario=usuario)
             elif resultado=='DOCENTE':
-                return render_template('home_docente.html',resultado= resultado)
+                return render_template('home_docente.html',usuario= usuario)
             else:
-                return render_template('home.html',resultado= resultado)
+                return render_template('home.html',usuario= usuario)
         else:
             resultado='visible'
             return render_template('login.html',resultado= resultado)        
