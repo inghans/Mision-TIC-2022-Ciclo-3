@@ -22,7 +22,7 @@ def docentes():
     response=controller.DatosUsuarios('DOCENTE')
     return render_template('docentes.html',lista=response)
 
-# programacion de RUTA materias 
+# programacion de RUTA materias  realizado por: LERKIS
 @app.route('/materias',methods=('GET','POST'))
 def materias():
     if request.method == 'POST':
