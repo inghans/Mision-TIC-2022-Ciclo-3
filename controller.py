@@ -36,8 +36,20 @@ def MateriasListar():
     #for item in cursor:
     return cursor.fetchall() #item
     conn.close()
-
 #CRUD Docentes
+#CRUD Noticias Programado por: Lerkis
+def NoticiaGuardar(Encabezado,Descripcion, Fecha):
+    conn= Conectar()    
+    cursor= conn.execute("INSERT INTO noticias VALUES(NULL,'"+Encabezado+"','"+Descripcion+"','"+Fecha+"');")
+    #for item in cursor:  
+    conn.commit()  
+    conn.close()
+def NoticiaListar():
+    conn= Conectar()    
+    cursor= conn.execute("SELECT * FROM NOTICIAS")
+    #for item in cursor:
+    return cursor.fetchall() #item
+    conn.close()
 
         
     

@@ -1,0 +1,72 @@
+{% extends 'head.html' %}
+
+{% block contenido %}
+    <!-- MENU DE NAVEGACION DE USUARIOS LOGIN Programado: Lerkis-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% print(usuario) %}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Configurar</a>
+                        <a class="dropdown-item" href="#">Salir</a>                        
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- FIN DE MENU -->
+    <!-- INICIO DE CONTENIDO-->
+    <div class="card">
+        <div class="card-body">
+            <h3>Registro de Noticias</h3>
+            <form action="/noticias" method="POST">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Encabezado Noticia</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="txtEncabezado">
+                </div>                
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Descipcion Noticia</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="txtDescripcion"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">Fecha de Noticia</label>
+                    <input type="date" name="dtFecha">
+                </div>
+                <button type="submit" class="asignar-deco btn btn-primary">Enviar</button>
+            </form>         
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Encabezado</th>
+                        <th>Descripcion</th>
+                        
+                    </tr>            
+                </thead>
+                <tbody>
+                    {% for item in lista %}
+                    <tr>                
+                        <td>{% print(item[0])%}</td>
+                        <td>{% print(item[1])%}</td>
+                        <td>{% print(item[2])%}</td>
+                        <td>{% print(item[3])%}</td>                
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        
+            </table>
+        </div>
+    </div>
+        
+    
+{% endblock %}

@@ -22,6 +22,20 @@ def docentes():
     response=controller.DatosUsuarios('DOCENTE')
     return render_template('docentes.html',lista=response)
 
+# programacion de RUTA NOTICIAS  realizado por: LERKIS
+@app.route('/noticias',methods=('GET','POST'))
+def noticias():
+    if request.method == 'POST':
+        Encabezado=request.form['txtEncabezado']
+        Descripcion=request.form['txtDescripcion']
+        Fecha=request.form['dtFecha']
+        r=controller.NoticiaGuardar(Encabezado,Descripcion, Fecha)
+        response=controller.NoticiaListar()        
+        return render_template('noticias.html',lista=response)
+    else:
+        response=controller.NoticiaListar()        
+        return render_template('noticias.html',lista=response)
+
 # programacion de RUTA materias  realizado por: LERKIS
 @app.route('/materias',methods=('GET','POST'))
 def materias():
