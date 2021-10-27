@@ -22,6 +22,7 @@ def docentes():
     response=controller.DatosUsuarios('DOCENTE')
     return render_template('docentes.html',lista=response)
 
+# programacion de RUTA materias 
 @app.route('/materias',methods=('GET','POST'))
 def materias():
     if request.method == 'POST':
