@@ -26,7 +26,7 @@ def DatosUsuarios(rol):
 
 def PersonaGuardar(Nombre, Telefono, Correo, Direccion, Roles):
     conn= Conectar()    
-    cursor= conn.execute("INSERT INTO user VALUES(NULL,'"+Nombre+"','"+Telefono+"','"+Correo+"','"+Direccion+"','"+Roles+"');")
+    cursor= conn.execute("INSERT INTO user VALUES(NULL,?,?,?,?,?);",(Nombre,Telefono,Correo,Direccion,int(Roles)))
     #for item in cursor:  
     conn.commit()  
     conn.close()

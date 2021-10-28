@@ -45,7 +45,7 @@ def personas():
         Direccion=request.form['txtDireccion']
         Correo=request.form['txtCorreo']
         Roles=request.form.get('cboRoles')   
-        r=controller.PersonaGuardar(Nombre,Telefono,Correo, Direccion, str(Roles))
+        r=controller.PersonaGuardar(Nombre,Telefono,Correo, Direccion, Roles)
     response=controller.RolesListar()        
     return render_template('personas.html',lista=response)
     
