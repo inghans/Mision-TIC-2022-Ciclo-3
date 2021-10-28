@@ -16,11 +16,19 @@ def Ingreso(usuario, password):
     return cursor.fetchone() #item
     conn.close()
 
+#CRUD Persona Programado por: Lerkis
 def DatosUsuarios(rol):    
     conn= Conectar()    
     cursor= conn.execute("select `user`.id, `user`.nombre_usuario,`user`.telefono, `user`.correo from `user` inner join roles on (`user`.id_rol=roles.id) where `roles`.nombre='"+rol+"';")
     #for item in cursor:
     return cursor.fetchall() #item
+    conn.close()
+
+def PersonaGuardar(Nombre, Telefono, Correo, Direccion, Roles):
+    conn= Conectar()    
+    cursor= conn.execute("INSERT INTO user VALUES(NULL,'"+Nombre+"','"+Telefono+"','"+Correo+"','"+Direccion+"','"+Roles+"');")
+    #for item in cursor:  
+    conn.commit()  
     conn.close()
 
 # CRUD MATERIA
@@ -47,6 +55,14 @@ def CursosGuardar(val):
 def CursosListar():
     conn= Conectar()    
     cursor= conn.execute("SELECT * FROM CURSOS")
+    #for item in cursor:
+    return cursor.fetchall() #item
+    conn.close()
+
+#CRUD roles Programado por:Lerkis
+def RolesListar():
+    conn= Conectar()    
+    cursor= conn.execute("SELECT * FROM ROLES")
     #for item in cursor:
     return cursor.fetchall() #item
     conn.close()

@@ -36,6 +36,20 @@ def noticias():
         response=controller.NoticiaListar()        
         return render_template('noticias.html',lista=response)
 
+# programacion de RUTA personas  realizado por: LERKIS
+@app.route('/personas',methods=('GET','POST'))
+def personas():
+    if request.method == 'POST':
+        Nombre=request.form['txtNombre']
+        Telefono=request.form['txtTelefono']
+        Direccion=request.form['txtDireccion']
+        Correo=request.form['txtCorreo']
+        Roles=request.form.get('cboRoles')   
+        r=controller.PersonaGuardar(Nombre,Telefono,Correo, Direccion, str(Roles))
+    response=controller.RolesListar()        
+    return render_template('personas.html',lista=response)
+    
+
 # programacion de RUTA materias  realizado por: LERKIS
 @app.route('/materias',methods=('GET','POST'))
 def materias():
