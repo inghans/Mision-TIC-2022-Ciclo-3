@@ -22,6 +22,18 @@ def docentes():
     response=controller.DatosUsuarios('DOCENTE')
     return render_template('docentes.html',lista=response)
 
+# programacion de RUTA MATRICULAS realizado por: LERKIS
+@app.route('/matriculas',methods=('GET','POST'))
+def matriculas():
+    if request.method == 'POST':
+        idCurso=request.form.get('cboCurso')
+        idEstudiante=request.form.get('cboEstudiante')        
+        r=controller.MatriculaGuardar(idCurso,idEstudiante)
+    responseCurso=controller.CursosListar()        
+    responseEstudiante=controller.PersonaListar('ESTUDIANTE')
+    response=controller.MatriculaListar()        
+    return render_template('matriculas.html',listaCurso=responseCurso, listaEstudiante=responseEstudiante,lista=response)
+
 # programacion de RUTA NOTICIAS  realizado por: LERKIS
 @app.route('/noticias',methods=('GET','POST'))
 def noticias():
@@ -44,7 +56,7 @@ def personas():
         Telefono=request.form['txtTelefono']
         Direccion=request.form['txtDireccion']
         Correo=request.form['txtCorreo']
-        Roles=request.form.get('cboRoles')   
+        Roles=request.form.get('cboRol')   
         r=controller.PersonaGuardar(Nombre,Telefono,Correo, Direccion, Roles)
     response=controller.RolesListar()        
     return render_template('personas.html',lista=response)

@@ -31,6 +31,13 @@ def PersonaGuardar(Nombre, Telefono, Correo, Direccion, Roles):
     conn.commit()  
     conn.close()
 
+def PersonaListar(rol):
+    conn= Conectar()    
+    cursor= conn.execute("select `user`.id, `user`.nombre_usuario from `user` inner join roles on (`user`.id_rol=roles.id) where roles.nombre='"+rol+"';")
+    #for item in cursor:
+    return cursor.fetchall() #item
+    conn.close()
+
 # CRUD MATERIA
 def MateriaGuardar(val):
     conn= Conectar()    
@@ -75,12 +82,29 @@ def NoticiaGuardar(Encabezado,Descripcion, Fecha):
     #for item in cursor:  
     conn.commit()  
     conn.close()
+
 def NoticiaListar():
     conn= Conectar()    
     cursor= conn.execute("SELECT * FROM NOTICIAS")
     #for item in cursor:
     return cursor.fetchall() #item
     conn.close()
+
+#CRUD Matriculas Programado por: Lerkis
+def MatriculaGuardar(idCurso,idMatricula):
+    conn= Conectar()    
+    cursor= conn.execute("INSERT INTO matriculas VALUES(NULL,'"+idCurso+"','"+idMatricula+"');")
+    #for item in cursor:  
+    conn.commit()  
+    conn.close()
+
+def MatriculaListar():
+    conn= Conectar()    
+    cursor= conn.execute("select matriculas.id, cursos.nombre_curso,`user`.nombre_usuario from matriculas inner join cursos on (matriculas.id_curso=cursos.id) inner join `user` on (matriculas.id_estudiante=`user`.id)")
+    #for item in cursor:
+    return cursor.fetchall() #item
+    conn.close()
+
 
         
     
