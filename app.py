@@ -48,6 +48,18 @@ def materias():
         response=controller.MateriasListar()        
         return render_template('materias.html',lista=response)
 
+# programacion de RUTA cursos  realizado por: HANS
+@app.route('/cursos',methods=('GET','POST'))
+def cursos():
+    if request.method == 'POST':
+        cursos=request.form['txtCursos']
+        r=controller.CursosGuardar(cursos)
+        response=controller.CursosListar()        
+        return render_template('cursos.html',lista=response)
+    else:
+        response=controller.MateriasListar()        
+        return render_template('cursos.html',lista=response)
+
 @app.route('/notas')
 def notas():
     ejemplo='bienvenido Hans aqui puedes verificar tus notas'
