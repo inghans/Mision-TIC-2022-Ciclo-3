@@ -52,12 +52,12 @@ def materias():
 @app.route('/cursos',methods=('GET','POST'))
 def cursos():
     if request.method == 'POST':
-        cursos=request.form['txtCursos']
-        r=controller.CursosGuardar(cursos)
+        curso=request.form['txtCurso']
+        r=controller.CursosGuardar(curso)
         response=controller.CursosListar()        
         return render_template('cursos.html',lista=response)
     else:
-        response=controller.MateriasListar()        
+        response=controller.CursosListar()        
         return render_template('cursos.html',lista=response)
 
 @app.route('/notas')
