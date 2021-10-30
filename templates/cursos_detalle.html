@@ -2,30 +2,28 @@
 
 {% block contenido %}
     <!-- MENU DE NAVEGACION DE USUARIOS LOGIN Programado: Lerkis-->
-    
-    <!-- FIN DE MENU -->
-    <!-- INICIO DE CONTENIDO-->
     <div class="card">
         <div class="card-body">
-            <h3>Registro de Matriculas</h3>
-            <form action="/matriculas" method="POST">
+            <h3>Detalle de Curso {{ nombre }}</h3>
+            <form action="/cursos_detalle" method="POST">
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Seleccione Curso</label>
-                    <select name="cboCurso">
-                        {% for item in listaCurso %}
+                    <input type="hidden" name="txtIdCurso" value="{{ id }}">
+                    <label for="exampleFormControlInput1">Seleccione Materia</label>
+                    <select name="cboMaterias">
+                        {% for item in listaMaterias %}
                             <option value="{{ item[0] }}">{{ item[1] }}</option>                        
                         {% endfor %}
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="exampleFormControlInput1">Seleccione Estudiante</label>
-                    <select name="cboEstudiante">
-                        {% for item in listaEstudiante %}
+                <div class="form-group">                    
+                    <label for="exampleFormControlInput1">Seleccione Docente</label>
+                    <select name="cboDocentes">
+                        {% for item in listaDocentes %}
                             <option value="{{ item[0] }}">{{ item[1] }}</option>                        
                         {% endfor %}
                     </select>
-                </div>  
-                
+                </div>                
+                <input type="hidden" name="txtEditar" value="2">
                 <button type="submit" class="asignar-deco btn btn-primary">Enviar</button>
             </form>         
         </div>
@@ -35,9 +33,10 @@
             <table class="table table-sm">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>CURSO</th>
-                        <th>ESTUDIANTE</th>
+                        
+                        <th>MATERIA</th>
+                        <th>DOCENTE</th>
+                        
                         
                     </tr>            
                 </thead>
@@ -45,8 +44,7 @@
                     {% for item in lista %}
                     <tr>                
                         <td>{% print(item[0])%}</td>
-                        <td>{% print(item[1])%}</td>                
-                        <td>{% print(item[2])%}</td>                
+                        <td>{% print(item[1])%}</td>                            
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -54,7 +52,4 @@
             </table>
         </div>
     </div>
-    
-        
-    
 {% endblock %}

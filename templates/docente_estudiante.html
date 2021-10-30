@@ -1,0 +1,29 @@
+{% extends 'head_docentes.html' %}
+
+{% block contenido %}
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>TELEFONO</th>
+                <th>CORREO</th>
+                <th>DIRECCION</th>
+                
+            </tr>            
+        </thead>
+        <tbody>
+            {% for item in lista %}
+            <tr>                
+                <td>{% print(item[0])%}</td>
+                <td>{% print(item[1])%}</td>
+                <td>{% print(item[2])%}</td>
+                <td>{% print(item[3])%}</td>
+                <td>{% print(item[4])%}</td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+{% endblock %}

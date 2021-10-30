@@ -1,0 +1,61 @@
+{% extends 'head_docentes.html' %}
+
+{% block contenido %}
+    <!-- MENU DE NAVEGACION DE USUARIOS LOGIN Programado: Lerkis-->
+    
+    <!-- FIN DE MENU -->
+    <!-- INICIO DE CONTENIDO-->    
+    <div class="card">
+        <div class="card-body">
+            <h3>Registro de Actividades - {{ NombreCurso}} - {{ NombreMateria }}</h3>
+            <form action="/actividades_crear" method="POST">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Nombre</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="txtNombre">
+                </div>                
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Descipcion</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="txtDescripcion"></textarea>
+                </div>
+                <input type="hidden" name="txtEditar" value="2">
+                <input type="hidden" name="txtIdCurso" value="{{ IdCurso }}">
+                <input type="hidden" name="txtIdMateria" value="{{ IdMateria }}">
+                <button type="submit" class="asignar-deco btn btn-primary">Enviar</button>
+            </form>         
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>ACTIVIDAD</th>
+                        <th>DESCRIPCION</th>
+                        <th></th>
+                        
+                    </tr>            
+                </thead>
+                <tbody>
+                    {% for item in lista %}
+                    <tr>                
+                        <td>{% print(item[0])%}</td>
+                        <td>{% print(item[1])%}</td>
+                        <td>{% print(item[2])%}</td>
+                        <td>
+                            <form action="/calificar_estudiante" method="POST">
+                                <input type="hidden" name="txtIdActividad" value="{% print(item[0])%}">                                    
+                                <button type="submit" class="btn btn-primary" title="Editar"><i class="bi bi-pencil-square"></i></button>
+                            </form>                              
+                        </td>  
+                              
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        
+            </table>
+        </div>
+    </div>
+        
+    
+{% endblock %}

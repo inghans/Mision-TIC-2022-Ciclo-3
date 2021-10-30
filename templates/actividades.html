@@ -1,0 +1,41 @@
+{% extends 'head_docentes.html' %}
+
+{% block contenido %}
+    <!-- MENU DE NAVEGACION DE USUARIOS LOGIN Programado: Lerkis-->    
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOMBRE CURSO</th>
+                        <th>ID MATERIA</th>
+                        <th>MATERIA</th>
+                        <th>ACCIONES</th>                        
+                    </tr>            
+                </thead>
+                <tbody>
+                    {% for item in lista %}
+                    <tr>                
+                        <td>{% print(item[0])%}</td>
+                        <td>{% print(item[1])%}</td>
+                        <td >{% print(item[3])%}</td>                        
+                        <td>{% print(item[4])%}</td>
+                        <td>
+                            <form action="/actividades_crear" method="POST">
+                                <input type="hidden" name="txtEditar" value="1">
+                                <input type="hidden" name="txtIdCurso" value="{% print(item[0])%}">
+                                <input type="hidden" name="txtNombreCurso" value="{% print(item[1])%}">
+                                <input type="hidden" name="txtIdMateria" value="{% print(item[3])%}">
+                                <input type="hidden" name="txtNombreMateria" value="{% print(item[4])%}">                                
+                                <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
+                            </form>                            
+                        </td>      
+                            
+                    </tr>
+                    {% endfor %}
+                </tbody>        
+            </table>
+        </div>
+    </div>
+{% endblock %}

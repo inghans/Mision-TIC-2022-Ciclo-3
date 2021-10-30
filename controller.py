@@ -74,6 +74,13 @@ def CursosGuardar(val):
     conn.commit()  
     conn.close()
 
+def CursosGuardarDetalle(idCurso,idMateria,IdDocente):
+    conn= Conectar()    
+    cursor= conn.execute("INSERT INTO curso_detalle VALUES(NULL,'"+idCurso+"','"+idMateria+"','"+IdDocente+"');")
+    #for item in cursor:  
+    conn.commit()  
+    conn.close()
+
 def CursoActualizar(Nombre,id):
     conn= Conectar()    
     cursor= conn.execute("update cursos set nombre_curso='"+Nombre+"' where id='"+id+"'")
@@ -88,6 +95,13 @@ def CursosListar():
     return cursor.fetchall() #item
     conn.close()
 
+def CursosListarDetalle(val):
+    conn= Conectar()    
+    cursor= conn.execute("select materias.nombre_materia, `user`.nombre_usuario from curso_detalle inner join materias on (curso_detalle.id_materia=materias.id) inner join `user` on (curso_detalle.id_user=`user`.id) where curso_detalle.id_curso='"+val+"'")
+    #for item in cursor:
+    return cursor.fetchall() #item
+    conn.close()
+
 #CRUD roles Programado por:Lerkis
 def RolesListar():
     conn= Conectar()    
@@ -97,6 +111,27 @@ def RolesListar():
     conn.close()
 
 #CRUD Docentes
+def ActividadesListar(val):
+    conn= Conectar()    
+    cursor= conn.execute("select cursos.id as IdCurso, cursos.nombre_curso,`user`.nombre_usuario, materias.id as IdMateria, materias.nombre_materia from curso_detalle inner join cursos on (curso_detalle.id_curso=cursos.id)    inner join matriculas on (cursos.id=matriculas.id_curso) inner join `user` on (curso_detalle.id_user=`user`.id)    inner join materias on (curso_detalle.id_materia=materias.id) where curso_detalle.id_user='"+val+"'")
+    #for item in cursor:
+    return cursor.fetchall() #item
+    conn.close()
+
+def ActividadesListarMateria(IdCurso,IdMateria,IdDocente):
+    conn= Conectar()    
+    cursor= conn.execute("select actividades.id, actividades.nombre, actividades.nota from actividades inner join cursos on (actividades.id_curso=cursos.id) inner join materias on (actividades.id_materia=materias.id) where cursos.id='"+IdCurso+"' and materias.id='"+IdMateria+"' and actividades.id_docente='"+IdDocente+"'")
+    #for item in cursor:
+    return cursor.fetchall() #item
+    conn.close()
+
+def ActividadesGuardar(idCurso,idMateria,IdDocente,Nombre,Nota):
+    conn= Conectar()    
+    cursor= conn.execute("INSERT INTO actividades VALUES(NULL,'"+idCurso+"','"+idMateria+"','"+IdDocente+"','"+Nombre+"','"+Nota+"');")
+    #for item in cursor:  
+    conn.commit()  
+    conn.close()
+
 #CRUD Noticias Programado por: Lerkis
 def NoticiaGuardar(Encabezado,Descripcion, Fecha):
     conn= Conectar()    

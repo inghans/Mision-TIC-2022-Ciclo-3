@@ -1,8 +1,9 @@
 from re import T
-from flask import Flask, render_template, request
-import controller
+from flask import Flask, render_template, request, session
+import controller, os
 
 app= Flask(__name__)
+app.secret_key= os.urandom(32)
 
 @app.route('/')
 def login():
@@ -22,6 +23,12 @@ def estudiantes():
 def docentes():
     response=controller.DatosUsuarios('DOCENTE')
     return render_template('docentes.html',lista=response)
+
+# programacion de RUTA ESTUDIANTE por DOCENTE realizado por:Lerkis
+@app.route('/docente_estudiante')
+def docente_estudiante():
+    response=controller.DatosUsuarios('ESTUDIANTE')
+    return render_template('docente_estudiante.html',lista=response)
 
 # programacion de RUTA MATRICULAS realizado por: LERKIS
 @app.route('/matriculas',methods=('GET','POST'))
@@ -98,6 +105,27 @@ def CursoEditar():
             response=controller.CursosListar()        
             return render_template('cursos.html',lista=response)
 
+# programacion de RUTA CURSO DETALLE  realizado por: LERKIS
+@app.route('/cursos_detalle',methods=('GET','POST'))
+def CursoDetalle():
+    if request.method == 'POST':
+        editar=request.form['txtEditar']
+        IdCurso=request.form['txtIdCurso']        
+        if editar=='1':
+            NombreCurso=request.form['txtNombre']
+            listaMaterias=controller.MateriasListar()
+            listaDocentes=controller.DatosUsuarios('DOCENTE')
+            lista=controller.CursosListarDetalle(IdCurso)
+            return render_template('cursos_detalle.html',id=IdCurso,nombre=NombreCurso,listaMaterias=listaMaterias,listaDocentes=listaDocentes,lista=lista)        
+        else:
+            idMateria=request.form['cboMaterias']
+            IdDocente=request.form['cboDocentes']
+            r=controller.CursosGuardarDetalle(IdCurso,idMateria,IdDocente)
+            response=controller.CursosListar()
+            return render_template('cursos.html',lista=response)
+            
+        
+
 # programacion de RUTA EDITAR ESTUDIANTE  realizado por: Gustavo and Hans
 @app.route('/docentes_editar',methods=('GET','POST'))
 def DocentesEditar():
@@ -165,6 +193,36 @@ def notas():
     usuario='Hans'
     return render_template('notas.html',ejemplo=ejemplo,usuario=usuario)
 
+# programacion de RUTA ACTIVIDADES ralizado por: LERKIS
+@app.route('/actividades')
+def Actividades():
+    response=controller.ActividadesListar(str(session['idUser']))
+    return render_template('actividades.html',lista=response)
+
+@app.route('/actividades_crear',methods=('GET','POST'))
+def ActividadesCrear():
+    if request.method == 'POST':
+        editar=request.form['txtEditar']
+        IdCurso=request.form['txtIdCurso']        
+        IdMateria=request.form['txtIdMateria']        
+        idUser=session['idUser']
+        if editar=='1':
+            NombreCurso=request.form['txtNombreCurso']
+            NombreMateria=request.form['txtNombreMateria']
+            response=controller.ActividadesListarMateria(IdCurso,IdMateria,str(idUser))
+            return render_template('actividades_crear.html',IdCurso=IdCurso,IdMateria=IdMateria,idUser=idUser,NombreCurso=NombreCurso,NombreMateria=NombreMateria,lista=response)        
+        else:                                    
+            Nombre=request.form['txtNombre']
+            Descripcion=request.form['txtDescripcion']            
+            r=controller.ActividadesGuardar(IdCurso,IdMateria,str(idUser),Nombre,Descripcion)
+            response=controller.ActividadesListar(str(session['idUser']))
+            return render_template('actividades.html',lista=response)   
+
+@app.route('/actividades_notas',methods=('GET','POST'))
+def ActividadesNotas():
+    response=controller.ActividadesListar(str(session['idUser']))
+    return render_template('actividades.html',lista=response)
+
 @app.route('/home')
 def home():
     return render_template('home.html')
@@ -179,6 +237,9 @@ def sesion():
         if response:
             #traemos el ID y ROL del LOGIN
             resultado=response[0]
+            idUser=response[1]
+            session['idUser'] = idUser
+            session['NombreUser'] = response[2]
             usuario=response[2]            
             if resultado=='ESTUDIANTE':
                 # enviamos a ruta estudiantes                
