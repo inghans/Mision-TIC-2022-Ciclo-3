@@ -81,7 +81,22 @@ def EstudiantesEditar():
             Correo=request.form['txtCorreo']
             r=controller.PersonaActualizar(Nombre,Telefono,Correo, Direccion,IdEstudiante)
             response=controller.DatosUsuarios('ESTUDIANTE')
-            return render_template('estudiantes.html',lista=response)   
+            return render_template('estudiantes.html',lista=response)
+
+# programacion de RUTA EDITAR CURSO  realizado por: LERKIS
+@app.route('/cursos_editar',methods=('GET','POST'))
+def CursoEditar():
+    if request.method == 'POST':
+        editar=request.form['txtEditar']
+        IdCurso=request.form['txtIdCurso']
+        if editar=='1':            
+            Nombre=request.form['txtNombre']            
+            return render_template('cursos_editar.html',id=IdCurso,Nombre=Nombre)        
+        else:                                    
+            Nombre=request.form['txtNombre']            
+            r=controller.CursoActualizar(Nombre,IdCurso)
+            response=controller.CursosListar()        
+            return render_template('cursos.html',lista=response)
 
 # programacion de RUTA EDITAR ESTUDIANTE  realizado por: Gustavo and Hans
 @app.route('/docentes_editar',methods=('GET','POST'))

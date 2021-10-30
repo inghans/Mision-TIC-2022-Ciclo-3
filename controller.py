@@ -73,6 +73,14 @@ def CursosGuardar(val):
     #for item in cursor:  
     conn.commit()  
     conn.close()
+
+def CursoActualizar(Nombre,id):
+    conn= Conectar()    
+    cursor= conn.execute("update cursos set nombre_curso='"+Nombre+"' where id='"+id+"'")
+    #for item in cursor:  
+    conn.commit()  
+    conn.close()
+
 def CursosListar():
     conn= Conectar()    
     cursor= conn.execute("SELECT * FROM CURSOS")
