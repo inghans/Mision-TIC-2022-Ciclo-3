@@ -8,15 +8,29 @@
                 <th>NOMBRE</th>
                 <th>TELEFONO</th>
                 <th>CORREO</th>
+                <th>DIRECCION</th>
+                <th>ACCIONES</th>
             </tr>            
         </thead>
-        <tbody>
+         <tbody>
             {% for item in lista %}
             <tr>                
                 <td>{% print(item[0])%}</td>
                 <td>{% print(item[1])%}</td>
                 <td>{% print(item[2])%}</td>
                 <td>{% print(item[3])%}</td>
+                <td>{% print(item[4])%}</td>
+                <td>
+                    <form action="/docentes_editar" method="POST">
+                        <input type="hidden" name="txtEditar" value="1">
+                        <input type="hidden" name="txtIdDocente" value="{% print(item[0])%}">
+                        <input type="hidden" name="txtNombre" value="{% print(item[1])%}">
+                        <input type="hidden" name="txtTelefono" value="{% print(item[2])%}">
+                        <input type="hidden" name="txtCorreo" value="{% print(item[3])%}">
+                        <input type="hidden" name="txtDireccion" value="{% print(item[4])%}">
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

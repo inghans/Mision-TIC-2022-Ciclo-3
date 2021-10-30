@@ -59,6 +59,13 @@ def MateriasListar():
     return cursor.fetchall() #item
     conn.close()
 
+def MateriaActualizar(Nombre,id):
+    conn= Conectar()    
+    cursor= conn.execute("update `materias` set nombre_materia='"+Nombre+"' where id='"+id+"'")
+    #for item in cursor:  
+    conn.commit()  
+    conn.close()
+
 # CRUD Cursos Programado por: HANS
 def CursosGuardar(val):
     conn= Conectar()    

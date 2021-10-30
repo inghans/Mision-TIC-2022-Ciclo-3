@@ -1,0 +1,20 @@
+{% extends 'head.html' %}
+
+{% block contenido %}
+    <!-- MENU DE NAVEGACION DE USUARIOS LOGIN Programado: Gustavo, Hans and Alex-->
+    <div class="card">
+        <div class="card-body">
+            <h3>Actualizar Materias</h3>
+            <form action="/materias_editar" method="POST">
+                <div class="form-group">
+                    <input type="hidden" name="txtEditar" value="2">
+                    <label for="exampleFormControlInput1">Nombre</label>
+                    <input type="hidden" class="form-control" id="exampleFormControlInput1" name="txtIdMateria" value="{{ id }}">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="txtNombre" value="{{ Nombre }}">
+                </div>
+
+                <button type="submit" class="asignar-deco btn btn-primary">Enviar</button>
+            </form>         
+        </div>
+    </div>
+{% endblock %}

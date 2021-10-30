@@ -1,0 +1,32 @@
+{% extends 'head.html' %}
+
+{% block contenido %}
+    <!-- MENU DE NAVEGACION DE USUARIOS LOGIN Programado: Gustavo and Hans-->
+    <div class="card">
+        <div class="card-body">
+            <h3>Actualizar Datos Docente</h3>
+            <form action="/docentes_editar" method="POST">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Nombre</label>
+                    <input type="hidden" class="form-control" id="exampleFormControlInput1" name="txtIdDocente" value="{{ id }}">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="txtNombre" value="{{ Nombre }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Telefono</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="txtTelefono" value="{{ Telefono }}">
+                </div>              
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Correo</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" name="txtCorreo" value="{{ Correo }}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Direccion</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="txtDireccion" value="{{ Direccion }}">
+                    <input type="hidden" name="txtEditar" value="2">
+                </div>
+
+                <button type="submit" class="asignar-deco btn btn-primary">Enviar</button>
+            </form>         
+        </div>
+    </div>
+{% endblock %}

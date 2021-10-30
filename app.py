@@ -83,6 +83,26 @@ def EstudiantesEditar():
             response=controller.DatosUsuarios('ESTUDIANTE')
             return render_template('estudiantes.html',lista=response)   
 
+# programacion de RUTA EDITAR ESTUDIANTE  realizado por: Gustavo and Hans
+@app.route('/docentes_editar',methods=('GET','POST'))
+def DocentesEditar():
+    if request.method == 'POST':
+        editar=request.form['txtEditar']
+        IdDocente=request.form['txtIdDocente']
+        if editar=='1':            
+            Nombre=request.form['txtNombre']
+            Telefono=request.form['txtTelefono']
+            Direccion=request.form['txtDireccion']
+            Correo=request.form['txtCorreo']                        
+            return render_template('docentes_editar.html',id=IdDocente,Nombre=Nombre, Telefono=Telefono,Direccion=Direccion,Correo=Correo)        
+        else:                                    
+            Nombre=request.form['txtNombre']
+            Telefono=request.form['txtTelefono']
+            Direccion=request.form['txtDireccion']
+            Correo=request.form['txtCorreo']
+            r=controller.PersonaActualizar(Nombre,Telefono,Correo, Direccion,IdDocente)
+            response=controller.DatosUsuarios('DOCENTE')
+            return render_template('docentes.html',lista=response) 
 
 # programacion de RUTA materias  realizado por: LERKIS
 @app.route('/materias',methods=('GET','POST'))
@@ -95,6 +115,22 @@ def materias():
     else:
         response=controller.MateriasListar()        
         return render_template('materias.html',lista=response)
+
+# programacion de RUTA EDITAR ESTUDIANTE  realizado por: Gustavo, Hans and Alex
+@app.route('/materias_editar',methods=('GET','POST'))
+def MateriaEditar():
+    if request.method == 'POST':
+        editar=request.form['txtEditar']
+        IdMateria=request.form['txtIdMateria']
+        if editar=='1':            
+            Nombre=request.form['txtNombre']                      
+            return render_template('materias_editar.html',id=IdMateria,Nombre=Nombre)        
+        else:                                    
+            Nombre=request.form['txtNombre']
+            r=controller.MateriaActualizar(Nombre,IdMateria)
+            response=controller.MateriasListar()
+            return render_template('materias.html',lista=response)
+
 
 # programacion de RUTA cursos  realizado por: HANS
 @app.route('/cursos',methods=('GET','POST'))
