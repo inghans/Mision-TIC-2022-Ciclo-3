@@ -8,7 +8,7 @@
             <form action="/estudiantes_editar" method="POST">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Nombre</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" name="txtIdEstudiante" value="{{ id }}">
+                    <input type="hidden" class="form-control" id="exampleFormControlInput1" name="txtIdEstudiante" value="{{ id }}">
                     <input type="text" class="form-control" id="exampleFormControlInput1" name="txtNombre" value="{{ Nombre }}">
                 </div>
                 <div class="form-group">
