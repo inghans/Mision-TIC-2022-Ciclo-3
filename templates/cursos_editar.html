@@ -1,0 +1,19 @@
+{% extends 'head.html' %}
+
+{% block contenido %}
+    <!-- MENU DE NAVEGACION DE USUARIOS LOGIN Programado: Lerkis-->
+    <div class="card">
+        <div class="card-body">
+            <h3>Actualizar Cursos</h3>
+            <form action="/cursos_editar" method="POST">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Nombre</label>
+                    <input type="hidden" name="txtEditar" value="2">
+                    <input type="hidden" class="form-control" id="exampleFormControlInput1" name="txtIdCurso" value="{{ id }}">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="txtNombre" value="{{ Nombre }}">
+                </div>
+                <button type="submit" class="asignar-deco btn btn-primary">Enviar</button>
+            </form>         
+        </div>
+    </div>
+{% endblock %}
