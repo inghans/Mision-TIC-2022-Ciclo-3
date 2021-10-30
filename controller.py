@@ -19,7 +19,7 @@ def Ingreso(usuario, password):
 #CRUD Persona Programado por: Lerkis
 def DatosUsuarios(rol):    
     conn= Conectar()    
-    cursor= conn.execute("select `user`.id, `user`.nombre_usuario,`user`.telefono, `user`.correo from `user` inner join roles on (`user`.id_rol=roles.id) where `roles`.nombre='"+rol+"';")
+    cursor= conn.execute("select `user`.id, `user`.nombre_usuario,`user`.telefono, `user`.correo, `user`.direccion from `user` inner join roles on (`user`.id_rol=roles.id) where `roles`.nombre='"+rol+"';")
     #for item in cursor:
     return cursor.fetchall() #item
     conn.close()
@@ -27,6 +27,13 @@ def DatosUsuarios(rol):
 def PersonaGuardar(Nombre, Telefono, Correo, Direccion, Roles):
     conn= Conectar()    
     cursor= conn.execute("INSERT INTO user VALUES(NULL,?,?,?,?,?);",(Nombre,Telefono,Correo,Direccion,int(Roles)))
+    #for item in cursor:  
+    conn.commit()  
+    conn.close()
+
+def PersonaActualizar(Nombre, Telefono, Correo, Direccion,id):
+    conn= Conectar()    
+    cursor= conn.execute("update `user` set nombre_usuario='"+Nombre+"', telefono='"+Telefono+"', correo='"+Correo+"', direccion='"+Direccion+"' where id='"+id+"'")
     #for item in cursor:  
     conn.commit()  
     conn.close()

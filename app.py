@@ -1,3 +1,4 @@
+from re import T
 from flask import Flask, render_template, request
 import controller
 
@@ -60,7 +61,28 @@ def personas():
         r=controller.PersonaGuardar(Nombre,Telefono,Correo, Direccion, Roles)
     response=controller.RolesListar()        
     return render_template('personas.html',lista=response)
-    
+
+# programacion de RUTA EDITAR ESTUDIANTE  realizado por: LERKIS
+@app.route('/estudiantes_editar',methods=('GET','POST'))
+def EstudiantesEditar():
+    if request.method == 'POST':
+        editar=request.form['txtEditar']
+        IdEstudiante=request.form['txtIdEstudiante']
+        if editar=='1':            
+            Nombre=request.form['txtNombre']
+            Telefono=request.form['txtTelefono']
+            Direccion=request.form['txtDireccion']
+            Correo=request.form['txtCorreo']                        
+            return render_template('estudiantes_editar.html',id=IdEstudiante,Nombre=Nombre, Telefono=Telefono,Direccion=Direccion,Correo=Correo)        
+        else:                                    
+            Nombre=request.form['txtNombre']
+            Telefono=request.form['txtTelefono']
+            Direccion=request.form['txtDireccion']
+            Correo=request.form['txtCorreo']
+            r=controller.PersonaActualizar(Nombre,Telefono,Correo, Direccion,IdEstudiante)
+            response=controller.DatosUsuarios('ESTUDIANTE')
+            return render_template('estudiantes.html',lista=response)   
+
 
 # programacion de RUTA materias  realizado por: LERKIS
 @app.route('/materias',methods=('GET','POST'))
